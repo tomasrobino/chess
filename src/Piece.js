@@ -13,7 +13,6 @@ export default class Piece {
 
         this.player = player;
         this.x, this.y = x, y;
-        board[y][x] = this;
     }
 
     checkMove() {
