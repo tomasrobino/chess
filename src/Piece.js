@@ -1,4 +1,6 @@
-class Piece {
+import { board } from ".";
+
+export default class Piece {
     player;
     x;
     y;

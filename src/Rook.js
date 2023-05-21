@@ -1,4 +1,9 @@
-class Rook extends Piece {
+import { board } from ".";
+
+const { default: Piece } = require("./Piece");
+
+
+export default class Rook extends Piece {
     checkMove() {
         if (this.player === "black") {
             if (this.y !== 7) { //Avoid Array index out of bounds

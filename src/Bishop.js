@@ -1,3 +1,5 @@
-class Bishop extends Piece {
+const { default: Piece } = require("./Piece");
+
+export default class Bishop extends Piece {
     
 }

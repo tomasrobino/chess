@@ -1,3 +1,5 @@
-class King extends Piece {
+const { default: Piece } = require("./Piece");
+
+export default class King extends Piece {
     
 }
