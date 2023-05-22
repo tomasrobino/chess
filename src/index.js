@@ -153,6 +153,10 @@ window.onload = function() {
 
                 sprite.x = i*60 +10;
                 sprite.y = k*60 +10;
+                sprite.eventMode = "static";
+                sprite.on("mouseup", (event) => {
+                    
+                })
                 app.stage.addChild(sprite);
             }
         }
