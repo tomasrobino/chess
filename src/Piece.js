@@ -4,6 +4,7 @@ export default class Piece {
     player;
     x;
     y;
+    graphic;
 
     constructor(x, y, player) {
         //Making this class abstract
@@ -12,7 +13,8 @@ export default class Piece {
         }
 
         this.player = player;
-        this.x, this.y = x, y;
+        this.x = x;
+        this.y = y;
     }
 
     checkMove() {
