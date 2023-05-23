@@ -79,12 +79,11 @@ window.onload = function() {
     //-----
     //Graphics
     //-----
-    const mainDiv = document.getElementById("mainDiv");
-    //var two = new Two({fitted: true}).appendTo(mainDiv);
     var app = new PIXI.Application({ width: 480, height: 480, backgroundColor: 0xA52A2A });
     document.body.appendChild(app.view);
     
 
+    var spriteList = [];
     //Draw board squares    
     for (let i=0; i<8; i+=2) {
         for (let k=0; k<8; k+=2) {
@@ -155,7 +154,24 @@ window.onload = function() {
                 sprite.y = k*60 +10;
                 sprite.eventMode = "static";
                 sprite.on("mouseup", (event) => {
-                    
+                    for (const h of spriteList) {
+                        app.stage.removeChild(h);
+                    }
+                    let list = b.checkMove();
+                    for (const h of list) {
+                        let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
+                        if (h[2] === 1) {
+                            rect.tint = 0x03FC13;
+                        } else {
+                            rect.tint = 0xF70707;
+                        }
+                        rect.width = 60;
+                        rect.height = 60;
+                        rect.x = h[0]*60;
+                        rect.y = h[1]*60;
+                        spriteList.push(rect);
+                        app.stage.addChild(rect);
+                    }
                 })
                 app.stage.addChild(sprite);
             }
