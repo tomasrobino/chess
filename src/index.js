@@ -157,6 +157,14 @@ window.onload = function() {
                     for (const h of spriteList) {
                         app.stage.removeChild(h);
                     }
+                    for (let h = 0; h < 8; h++) {
+                        for (let m = 0; m < 8; m++) {
+                            if (!isNaN(locBoard[h][m])) {
+                                locBoard[h][m] = 0;
+                            }
+                        }
+                    }
+
                     let list = b.checkMove();
                     for (const h of list) {
                         let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
@@ -172,6 +180,7 @@ window.onload = function() {
                         spriteList.push(rect);
                         app.stage.addChild(rect);
                     }
+                    console.log(locBoard);
                 })
                 app.stage.addChild(sprite);
             }

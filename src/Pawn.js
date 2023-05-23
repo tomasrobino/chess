@@ -1,5 +1,3 @@
-import * as PIXI from 'pixi.js';
-
 import { board } from ".";
 
 const { default: Piece } = require("./Piece");
@@ -14,14 +12,14 @@ export default class Pawn extends Piece {
                 //Check regular move
                 if (board[this.y+1][this.x] === 0) {
                     //Paint green
-                    board[this.y+1][this.x] = "green";
+                    board[this.y+1][this.x] = 1;
                     list.push([this.y+1, this.x, 1]);
 
                     //Check double rook move
                     if (this.y === 1) {
                         if (board[this.y+2][this.x] === 0) {
                             //Paint green
-                            board[this.y+2][this.x] = "green";
+                            board[this.y+2][this.x] = 1;
                             list.push([this.y+2, this.x, 1]);
                         }
                     }
@@ -31,13 +29,13 @@ export default class Pawn extends Piece {
                 if (this.x !== 7) { //Avoid Array index out of bounds
                     if ( (board[this.y+1][this.x+1] instanceof Piece) && board[this.y+1][this.x+1].player !== this.player ) {
                         //Paint red
-                        board[this.y+1][this.x+1] = "red";
+                        board[this.y+1][this.x+1] = 2;
                         list.push([this.y+1, this.x+1, 2]);
                     }
                 } else if (this.x !== 0) { //Avoid Array index out of bounds
                     if ( (board[this.y+1][this.x-1] instanceof Piece) && board[this.y+1][this.x-1].player !== this.player ) {
                         //Paint red
-                        board[this.y+1][this.x-1] = "red";
+                        board[this.y+1][this.x-1] = 2;
                         list.push([this.y+1, this.x-1, 2]);
                     }
                 }
@@ -47,13 +45,13 @@ export default class Pawn extends Piece {
                 //Check regular move
                 if (board[this.y-1][this.x] === 0) {
                     //Paint green
-                    board[this.y-1][this.x] = "green";
+                    board[this.y-1][this.x] = 1;
                     list.push([this.y-1, this.x, 1]);
                     //Check double rook move
                     if (this.y === 6) {
                         if (board[this.y-2][this.x] === 0) {
                             //Paint green
-                            board[this.y-2][this.x] = "green";
+                            board[this.y-2][this.x] = 1;
                             list.push([this.y-2, this.x, 1]);
                         }
                     }
@@ -63,13 +61,13 @@ export default class Pawn extends Piece {
                 if (this.x !== 7) { //Avoid Array index out of bounds
                     if ( (board[this.y-1][this.x+1] instanceof Piece) && board[this.y-1][this.x+1].player !== this.player ) {
                         //Paint red
-                        board[this.y-1][this.x+1] = "red";
+                        board[this.y-1][this.x+1] = 2;
                         list.push([this.y-1, this.x+1, 2]);
                     }
                 } else if (this.x !== 0) { //Avoid Array index out of bounds
                     if ( (board[this.y-1][this.x-1] instanceof Piece) && board[this.y-1][this.x-1].player !== this.player ) {
                         //Paint red
-                        board[this.y-1][this.x-1] = "red";
+                        board[this.y-1][this.x-1] = 2;
                         list.push([this.y-1, this.x+1, 2]);
                     }
                 }
