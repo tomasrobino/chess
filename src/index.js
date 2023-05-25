@@ -188,7 +188,7 @@ window.onload = function() {
                         rect.y = h[1]*60;
 
                         rect.eventMode = "static";
-                        rect.on("mouseup", (event) => {Z
+                        rect.on("mouseup", (event) => {
                             board[rect.x/60][rect.y/60] = board[(sprite.x-10) /60][(sprite.y-10) /60];
                             board[(sprite.x-10) /60][(sprite.y-10) /60] = 0;
                             
