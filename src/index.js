@@ -77,6 +77,7 @@ function setBoard(y, x, value) {
 }
 
 var board = buildBoard();
+var currentPlayer = "white";
 
 window.onload = function() {
     //-----
@@ -174,66 +175,77 @@ window.onload = function() {
                 }
 
                 sprite.on("mouseup", (event) => {
-                    cleanUp();
-                    let list = board[(sprite.y-10) /60][(sprite.x-10) /60].checkMove();
-                    for (const h of list) {
-                        let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
-                        rect.tint = 0x03FC13;
-                        rect.width = 60;
-                        rect.height = 60;
-                        rect.y = h[0]*60;
-                        rect.x = h[1]*60;
+                    if (currentPlayer === board[(sprite.y-10) /60][(sprite.x-10) /60].player) {
+                        console.log(currentPlayer);
+                        cleanUp();
+                        let list = board[(sprite.y-10) /60][(sprite.x-10) /60].checkMove();
+                        for (const h of list) {
+                            let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
+                            rect.tint = 0x03FC13;
+                            rect.alpha = 0.4;
+                            rect.width = 60;
+                            rect.height = 60;
+                            rect.y = h[0]*60;
+                            rect.x = h[1]*60;
 
-                        rect.eventMode = "static";
-                        rect.on("mouseup", (event) => {
-                            board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
-                            board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
-                            
-                            sprite.x = rect.x+10;
-                            sprite.y = rect.y+10;
+                            rect.eventMode = "static";
+                            rect.on("mouseup", (event) => {
+                                board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
+                                board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
+                                
+                                sprite.x = rect.x+10;
+                                sprite.y = rect.y+10;
 
-                            board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
-                            board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
-                            cleanUp();
-                        })
+                                board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
+                                board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
+                                cleanUp();
+                                if (currentPlayer === "white") {
+                                    currentPlayer = "black";
+                                } else currentPlayer = "white";
+                            })
 
-                        rectList.push(rect);
-                        app.stage.addChild(rect);
-                    }
+                            rectList.push(rect);
+                            app.stage.addChild(rect);
+                        }
 
-                    for (const h of board[(sprite.y-10) /60][(sprite.x-10) /60].targets) {
-                        let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
-                        rect.tint = 0xF70707;
-                        rect.width = 60;
-                        rect.height = 60;
-                        rect.y = h[0]*60;
-                        rect.x = h[1]*60;
+                        for (const h of board[(sprite.y-10) /60][(sprite.x-10) /60].targets) {
+                            let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
+                            rect.tint = 0xF70707;
+                            rect.alpha = 0.4;
+                            rect.width = 60;
+                            rect.height = 60;
+                            rect.y = h[0]*60;
+                            rect.x = h[1]*60;
 
-                        rect.eventMode = "static";
-                        rect.on("mouseup", (event) => {
-                            board[rect.y/60][rect.x/60].kill();
-                            for (const sprt of spriteList) {
-                                if ((sprt.x-10)/60 === rect.x/60 && (sprt.y-10)/60 === rect.y/60) {
-                                    app.stage.removeChild(sprt);
-                                    spriteList.splice(spriteList.indexOf(sprt), 1);
+                            rect.eventMode = "static";
+                            rect.on("mouseup", (event) => {
+                                board[rect.y/60][rect.x/60].kill();
+                                for (const sprt of spriteList) {
+                                    if ((sprt.x-10)/60 === rect.x/60 && (sprt.y-10)/60 === rect.y/60) {
+                                        app.stage.removeChild(sprt);
+                                        spriteList.splice(spriteList.indexOf(sprt), 1);
+                                    }
                                 }
-                            }
-                            
+                                
 
-                            board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
-                            board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
-                            
-                            sprite.x = rect.x+10;
-                            sprite.y = rect.y+10;
+                                board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
+                                board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
+                                
+                                sprite.x = rect.x+10;
+                                sprite.y = rect.y+10;
 
-                            board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
-                            board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
+                                board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
+                                board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
 
-                            cleanUp();
-                        })
+                                cleanUp();
+                                if (currentPlayer === "white") {
+                                    currentPlayer = "black";
+                                } else currentPlayer = "white";
+                            })
 
-                        rectList.push(rect);
-                        app.stage.addChild(rect);
+                            rectList.push(rect);
+                            app.stage.addChild(rect);
+                        }
                     }
                 })
                 spriteList.push(sprite);
