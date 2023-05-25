@@ -29,8 +29,6 @@ export default class Pawn extends Piece {
                 if (this.x !== 7) { //Avoid Array index out of bounds
                     if ( (board[this.y+1][this.x+1] instanceof Piece) && board[this.y+1][this.x+1].player !== this.player ) {
                         //Paint red
-                        //setBoard(this.y+1, this.x+1, 2);
-                        //list.push([this.y+1, this.x+1, 2]);
                         this.targets.push([this.y+1, this.x+1]);
                     }
                 }
@@ -38,8 +36,6 @@ export default class Pawn extends Piece {
                 if (this.x !== 0) { //Avoid Array index out of bounds
                     if ( (board[this.y+1][this.x-1] instanceof Piece) && board[this.y+1][this.x-1].player !== this.player ) {
                         //Paint red
-                        //setBoard(this.y+1, this.x-1, 2);
-                        //list.push([this.y+1, this.x-1, 2]);
                         this.targets.push([this.y+1, this.x-1]);
                     }
                 }
@@ -72,7 +68,7 @@ export default class Pawn extends Piece {
                 if (this.x !== 0) { //Avoid Array index out of bounds
                     if ( (board[this.y-1][this.x-1] instanceof Piece) && board[this.y-1][this.x-1].player !== this.player ) {
                         //Paint red
-                        this.targets.push([this.y-1, this.x+1]);
+                        this.targets.push([this.y-1, this.x-1]);
                     }
                 }
             }
