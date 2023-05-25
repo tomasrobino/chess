@@ -41,7 +41,6 @@ function buildBoard() {
     for (let i = 0; i < 8; i++) {
         b[1][i] = new Pawn(i, 1, "black");
         b[6][i] = new Pawn(i, 6, "white");
-        
     }
 
     //Add Rooks
@@ -153,8 +152,8 @@ window.onload = function() {
                     }
                 }
 
-                sprite.x = i*60 +10;
-                sprite.y = k*60 +10;
+                sprite.y = i*60 +10;
+                sprite.x = k*60 +10;
                 sprite.eventMode = "static";
 
                 function cleanUp() {
@@ -173,8 +172,7 @@ window.onload = function() {
 
                 sprite.on("mouseup", (event) => {
                     cleanUp();
-
-                    let list = board[(sprite.x-10) /60][(sprite.y-10) /60].checkMove();
+                    let list = board[(sprite.y-10) /60][(sprite.x-10) /60].checkMove();
                     for (const h of list) {
                         let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
                         if (h[2] === 1) {
@@ -184,19 +182,19 @@ window.onload = function() {
                         }
                         rect.width = 60;
                         rect.height = 60;
-                        rect.x = h[0]*60;
-                        rect.y = h[1]*60;
+                        rect.y = h[0]*60;
+                        rect.x = h[1]*60;
 
                         rect.eventMode = "static";
                         rect.on("mouseup", (event) => {
-                            board[rect.x/60][rect.y/60] = board[(sprite.x-10) /60][(sprite.y-10) /60];
-                            board[(sprite.x-10) /60][(sprite.y-10) /60] = 0;
+                            board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
+                            board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
                             
                             sprite.x = rect.x+10;
                             sprite.y = rect.y+10;
 
-                            board[(sprite.x-10) /60][(sprite.y-10) /60].x = rect.y/60;
-                            board[(sprite.x-10) /60][(sprite.y-10) /60].y = rect.x/60;
+                            board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
+                            board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
                             cleanUp();
                         })
 
