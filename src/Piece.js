@@ -1,4 +1,4 @@
-import { board } from ".";
+import { board, setBoard } from ".";
 
 export default class Piece {
     player;
@@ -23,7 +23,7 @@ export default class Piece {
 
     kill() {
         //In future can make counter for dead pieces
-        board[this.y][this.x] = 0;
+        setBoard(this.y, this.x, 0)
     }
 
     move(targetX, targetY) {

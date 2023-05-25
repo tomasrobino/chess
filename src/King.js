@@ -1,4 +1,4 @@
-import { board } from ".";
+import { board, setBoard } from ".";
 
 const { default: Piece } = require("./Piece");
 
@@ -10,10 +10,10 @@ export default class King extends Piece {
         if (this.y !== 7) {
             sel = board[this.y+1][this.x];
             if (sel === 0) {
-                board[this.y+1][this.x] = 1;
+                setBoard(this.y+1, this.x, 1);
                 list.push([this.y+1, this.x, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y+1][this.x] = 2;
+                setBoard(this.y+1, this.x, 2);
                 list.push([this.y+1, this.x, 2]);
             }
         }
@@ -21,10 +21,10 @@ export default class King extends Piece {
         if (this.y !== 7 && this.x !== 7) {
             sel = board[this.y+1][this.x+1];
             if (sel === 0) {
-                board[this.y+1][this.x+1] = 1;
+                setBoard(this.y+1, this.x+1, 1);
                 list.push([this.y+1, this.x+1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y+1][this.x+1] = 2;
+                setBoard(this.y+1, this.x+1, 2);
                 list.push([this.y+1, this.x+1, 2]);
             }
         }
@@ -32,10 +32,10 @@ export default class King extends Piece {
         if (this.y !== 7 && this.x !== 0) {
             sel = board[this.y+1][this.x-1];
             if (sel === 0) {
-                board[this.y+1][this.x-1] = 1;
+                setBoard(this.y+1, this.x-1, 1);
                 list.push([this.y+1, this.x-1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y+1][this.x-1] = 2;
+                setBoard(this.y+1, this.x-1, 2);
                 list.push([this.y+1, this.x-1, 2]);
             }
         }
@@ -43,10 +43,10 @@ export default class King extends Piece {
         if (this.x !== 7) {
             sel = board[this.y][this.x+1];
             if (sel === 0) {
-                board[this.y][this.x+1] = 1;
+                setBoard(this.y, this.x+1, 1);
                 list.push([this.y, this.x+1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y][this.x+1] = 2;
+                setBoard(this.y, this.x+1, 2);
                 list.push([this.y, this.x+1, 2]);
             }    
         }
@@ -54,10 +54,10 @@ export default class King extends Piece {
         if (this.x !== 0) {
             sel = board[this.y][this.x-1];
             if (sel === 0) {
-                board[this.y][this.x-1] = 1;
+                setBoard(this.y, this.x-1, 1);
                 list.push([this.y, this.x-1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y][this.x-1] = 2;
+                setBoard(this.y, this.x-1, 2);
                 list.push([this.y, this.x-1, 2]);
             }
         }
@@ -65,10 +65,10 @@ export default class King extends Piece {
         if (this.y !== 0) {
             sel = board[this.y-1][this.x];
             if (sel === 0) {
-                board[this.y-1][this.x] = 1;
+                setBoard(this.y-1, this.x, 1);
                 list.push([this.y-1, this.x, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y-1][this.x] = 2;
+                setBoard(this.y-1, this.x, 2);
                 list.push([this.y-1, this.x, 2]);
             }
         }
@@ -76,10 +76,10 @@ export default class King extends Piece {
         if (this.y !== 0 && this.x !== 7) {
             sel = board[this.y-1][this.x+1];
             if (sel === 0) {
-                board[this.y-1][this.x+1] = 1;
+                setBoard(this.y-1, this.x+1, 1);
                 list.push([this.y-1, this.x+1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y-1][this.x+1] = 2;
+                setBoard(this.y-1, this.x+1, 2);
                 list.push([this.y-1, this.x+1, 2]);
             }
         }
@@ -87,10 +87,10 @@ export default class King extends Piece {
         if (this.y !== 0 && this.x !== 0) {
             sel = board[this.y-1][this.x-1];
             if (sel === 0) {
-                board[this.y-1][this.x-1] = 1;
+                setBoard(this.y-1, this.x-1, 1);
                 list.push([this.y-1, this.x-1, 1]);
             } else if (sel.player !== this.player) {
-                board[this.y-1][this.x-1] = 2;
+                setBoard(this.y-1, this.x-1, 2);
                 list.push([this.y-1, this.x-1, 2]);
             }
         }

@@ -73,7 +73,11 @@ function buildBoard() {
     return b;
 }
 
-var locBoard = buildBoard();
+function setBoard(y, x, value) {
+    board[y][x] = value;
+}
+
+var board = buildBoard();
 
 window.onload = function() {
     //-----
@@ -108,8 +112,7 @@ window.onload = function() {
     //Drawn pieces' sprites
     for (let i=0; i<8; i++) {
         for (let k=0; k<8; k++) {
-            let b = locBoard[i][k];
-            let g;
+            let b = board[i][k];
             if (b !== 0) {
                 let sprite;
                 if (b instanceof Pawn) {
@@ -153,19 +156,25 @@ window.onload = function() {
                 sprite.x = i*60 +10;
                 sprite.y = k*60 +10;
                 sprite.eventMode = "static";
-                sprite.on("mouseup", (event) => {
+
+                function cleanUp() {
                     for (const h of spriteList) {
                         app.stage.removeChild(h);
                     }
+                    spriteList = [];
                     for (let h = 0; h < 8; h++) {
                         for (let m = 0; m < 8; m++) {
-                            if (!isNaN(locBoard[h][m])) {
-                                locBoard[h][m] = 0;
+                            if (!isNaN(board[h][m])) {
+                                board[h][m] = 0;
                             }
                         }
                     }
+                }
 
-                    let list = b.checkMove();
+                sprite.on("mouseup", (event) => {
+                    cleanUp();
+
+                    let list = board[(sprite.x-10) /60][(sprite.y-10) /60].checkMove();
                     for (const h of list) {
                         let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
                         if (h[2] === 1) {
@@ -177,10 +186,23 @@ window.onload = function() {
                         rect.height = 60;
                         rect.x = h[0]*60;
                         rect.y = h[1]*60;
+
+                        rect.eventMode = "static";
+                        rect.on("mouseup", (event) => {Z
+                            board[rect.x/60][rect.y/60] = board[(sprite.x-10) /60][(sprite.y-10) /60];
+                            board[(sprite.x-10) /60][(sprite.y-10) /60] = 0;
+                            
+                            sprite.x = rect.x+10;
+                            sprite.y = rect.y+10;
+
+                            board[(sprite.x-10) /60][(sprite.y-10) /60].x = rect.y/60;
+                            board[(sprite.x-10) /60][(sprite.y-10) /60].y = rect.x/60;
+                            cleanUp();
+                        })
+
                         spriteList.push(rect);
                         app.stage.addChild(rect);
                     }
-                    console.log(locBoard);
                 })
                 app.stage.addChild(sprite);
             }
@@ -188,4 +210,4 @@ window.onload = function() {
     }
 }
 
-export var board = locBoard;
+export {board, setBoard};
