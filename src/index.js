@@ -165,6 +165,8 @@ window.onload = function() {
                         for (let m = 0; m < 8; m++) {
                             if (!isNaN(board[h][m])) {
                                 board[h][m] = 0;
+                            } else {
+                                board[h][m].targets = [];
                             }
                         }
                     }
@@ -175,11 +177,32 @@ window.onload = function() {
                     let list = board[(sprite.y-10) /60][(sprite.x-10) /60].checkMove();
                     for (const h of list) {
                         let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
-                        if (h[2] === 1) {
-                            rect.tint = 0x03FC13;
-                        } else {
-                            rect.tint = 0xF70707;
-                        }
+                        rect.tint = 0x03FC13;
+                        rect.width = 60;
+                        rect.height = 60;
+                        rect.y = h[0]*60;
+                        rect.x = h[1]*60;
+
+                        rect.eventMode = "static";
+                        rect.on("mouseup", (event) => {
+                            board[rect.y/60][rect.x/60] = board[(sprite.y-10) /60][(sprite.x-10) /60];
+                            board[(sprite.y-10) /60][(sprite.x-10) /60] = 0;
+                            
+                            sprite.x = rect.x+10;
+                            sprite.y = rect.y+10;
+
+                            board[(sprite.y-10) /60][(sprite.x-10) /60].x = rect.x/60;
+                            board[(sprite.y-10) /60][(sprite.x-10) /60].y = rect.y/60;
+                            cleanUp();
+                        })
+
+                        spriteList.push(rect);
+                        app.stage.addChild(rect);
+                    }
+
+                    for (const h of board[(sprite.y-10) /60][(sprite.x-10) /60].targets) {
+                        let rect = PIXI.Sprite.from(PIXI.Texture.WHITE);
+                        rect.tint = 0xF70707;
                         rect.width = 60;
                         rect.height = 60;
                         rect.y = h[0]*60;

@@ -11,10 +11,9 @@ export default class King extends Piece {
             sel = board[this.y+1][this.x];
             if (sel === 0) {
                 setBoard(this.y+1, this.x, 1);
-                list.push([this.y+1, this.x, 1]);
+                list.push([this.y+1, this.x]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y+1, this.x, 2);
-                list.push([this.y+1, this.x, 2]);
+                this.targets.push([this.y+1, this.x]);
             }
         }
 
@@ -22,10 +21,9 @@ export default class King extends Piece {
             sel = board[this.y+1][this.x+1];
             if (sel === 0) {
                 setBoard(this.y+1, this.x+1, 1);
-                list.push([this.y+1, this.x+1, 1]);
+                list.push([this.y+1, this.x+1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y+1, this.x+1, 2);
-                list.push([this.y+1, this.x+1, 2]);
+                this.targets.push([this.y+1, this.x+1]);
             }
         }
         
@@ -33,10 +31,9 @@ export default class King extends Piece {
             sel = board[this.y+1][this.x-1];
             if (sel === 0) {
                 setBoard(this.y+1, this.x-1, 1);
-                list.push([this.y+1, this.x-1, 1]);
+                list.push([this.y+1, this.x-1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y+1, this.x-1, 2);
-                list.push([this.y+1, this.x-1, 2]);
+                this.targets.push([this.y+1, this.x-1]);
             }
         }
         
@@ -44,10 +41,9 @@ export default class King extends Piece {
             sel = board[this.y][this.x+1];
             if (sel === 0) {
                 setBoard(this.y, this.x+1, 1);
-                list.push([this.y, this.x+1, 1]);
+                list.push([this.y, this.x+1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y, this.x+1, 2);
-                list.push([this.y, this.x+1, 2]);
+                this.targets.push([this.y, this.x+1]);
             }    
         }
         
@@ -55,10 +51,9 @@ export default class King extends Piece {
             sel = board[this.y][this.x-1];
             if (sel === 0) {
                 setBoard(this.y, this.x-1, 1);
-                list.push([this.y, this.x-1, 1]);
+                list.push([this.y, this.x-1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y, this.x-1, 2);
-                list.push([this.y, this.x-1, 2]);
+                this.targets.push([this.y, this.x-1]);
             }
         }
         
@@ -66,10 +61,9 @@ export default class King extends Piece {
             sel = board[this.y-1][this.x];
             if (sel === 0) {
                 setBoard(this.y-1, this.x, 1);
-                list.push([this.y-1, this.x, 1]);
+                list.push([this.y-1, this.x]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y-1, this.x, 2);
-                list.push([this.y-1, this.x, 2]);
+                this.targets.push([this.y-1, this.x]);
             }
         }
         
@@ -77,10 +71,9 @@ export default class King extends Piece {
             sel = board[this.y-1][this.x+1];
             if (sel === 0) {
                 setBoard(this.y-1, this.x+1, 1);
-                list.push([this.y-1, this.x+1, 1]);
+                list.push([this.y-1, this.x+1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y-1, this.x+1, 2);
-                list.push([this.y-1, this.x+1, 2]);
+                this.targets.push([this.y-1, this.x+1]);
             }
         }
         
@@ -88,10 +81,9 @@ export default class King extends Piece {
             sel = board[this.y-1][this.x-1];
             if (sel === 0) {
                 setBoard(this.y-1, this.x-1, 1);
-                list.push([this.y-1, this.x-1, 1]);
+                list.push([this.y-1, this.x-1]);
             } else if (sel.player !== this.player) {
-                setBoard(this.y-1, this.x-1, 2);
-                list.push([this.y-1, this.x-1, 2]);
+                this.targets.push([this.y-1, this.x-1]);
             }
         }
         

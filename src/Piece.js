@@ -5,6 +5,7 @@ export default class Piece {
     x;
     y;
     graphic;
+    targets = [];
 
     constructor(x, y, player) {
         //Making this class abstract
